@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div id="main-wrapper">
+
+        <h1>Trivia Game</h1>
+
+        <div id="clock">00:00</div>
+
+        <button id="start">Start</button>
+
+        <main>
+
+            <section id="rules-section">
+
+                <h2>Rules:</h2>
+                <ul>
+                    <li>Press "Start" to start the game.</li>
+                    <li>There are 15 questions</li>
+                    <li>Each has 3 answers to choose from.</li>
+                    <li>Only one of them is correct.</li>
+                    <li>You will be given 30 seconds to answer each question.</li>
+                    <li>See how many you can answer correctly.</li>
+                </ul>
+
+            </section>
+
+            <section id="quiz-section">
+
+                <form id="quiz-form">Questions:
+
+                    <fieldset>
+                        <legend id="question" class="bold"></legend>
+                        <input type="radio" name="opt" class="option" value="1">&nbsp;<label id="label-1" class="question"></label><br>
+                        <input type="radio" name="opt" class="option" value="2">&nbsp;<label id="label-2" class="question"></label><br>
+                        <input type="radio" name="opt" class="option" value="3">&nbsp;<label id="label-3" class="question"></label><br>
+                    </fieldset>
+
+                </form>
+
+                <p id="answer" class="bold"></p>
+
+            </section>
+
+            <p id="result" class="bold"></p>
+
+        </main>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+    </div>
+
+</body>
+
+</html>
