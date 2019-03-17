@@ -1,21 +1,25 @@
-//----- event handlers -----//
+// Initialize the display.
+$('rules-section').show();
+$('#quiz-section').css('visibility', 'hidden');
+$('#result').text('');
 
-window.onload = function() {
+// Listen and respond
+window.onload = function () {
 
-    $('#start').click(function() {
+    $('#start').click(function () {
 
         startGame();
 
     });
 
-    $('#quiz-form input').on('change', function() {
+    $('#quiz-form input').on('change', function () {
 
         var value = $('input[name=opt]:checked', '#quiz-form').val();
 
         timer.stop();
 
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(function() {
+        timeoutId = setTimeout(function () {
 
             checkAnswer(value);
 
@@ -23,9 +27,84 @@ window.onload = function() {
     });
 };
 
+// Data
+
+var quizArr = [{
+        question: '"Intelligence plus character—that is the goal of true education."',
+        option1: 'Maya Angelou',
+        option2: 'Dr. Martin Luther King Jr.',
+        option3: 'Mahatma Gandhi',
+        answer: 'Dr. Martin Luther King Jr.'
+    },
+    {
+        question: '"If you are always trying to be normal you will never know how amazing you can be."',
+        option1: 'Maya Angelou',
+        option2: 'Nelson Mandela',
+        option3: 'Mahatma Gandhi',
+        answer: 'Maya Angelou'
+    },
+    {
+        question: '"Be the change that you wish to see in the world."',
+        option1: 'Maya Angelou',
+        option2: 'Mother Teresa',
+        option3: 'Mahatma Gandhi',
+        answer: 'Mahatma Gandhi'
+    },
+    {
+        question: '"If you want to change the world, go home and love your family."',
+        option1: 'Mahatma Gandhi',
+        option2: 'Mother Teresa',
+        option3: 'Dr. Martin Luther King Jr.',
+        answer: 'Mother Teresa'
+    },
+    {
+        question: '"Do not learn how to react learn how to respond."',
+        option1: 'Buddha',
+        option2: 'Confucius',
+        option3: 'Aristotle',
+        answer: 'Buddha'
+    },
+    {
+        question: '"True peace is not merely the absence of tension; it is the presence of justice."',
+        option1: 'Dr. Martin Luther King Jr.',
+        option2: 'Malcolm X',
+        option3: 'Mahatma Gandhi',
+        answer: 'Dr. Martin Luther King Jr.'
+    },
+    {
+        question: '"Obstacles are those frightful things you see when you take your eyes off the goal."',
+        option1: 'Steve Jobs',
+        option2: 'Albert Einstein',
+        option3: 'Henry Ford',
+        answer: 'Henry Ford'
+    },
+    {
+        question: '"It always seems impossible until it\'s done."',
+        option1: 'Nelson Mandela',
+        option2: 'Dr. Martin Luther King Jr.',
+        option3: 'Mahatma Gandhi',
+        answer: 'Nelson Mandela'
+    },
+    {
+        question: '"Resentment is like drinking poison and then hoping it will kill your enemies."',
+        option1: 'Mahatma Gandhi',
+        option2: 'Nelson Mandela',
+        option3: 'Dr. Martin Luther King Jr.',
+        answer: 'Nelson Mandela'
+    },
+    {
+        question: '"Only two things are infinite, the universe and human stupidity, and I\'m not sure about the former."',
+        option1: 'Winston Churchill',
+        option2: 'Albert Einstein',
+        option3: 'Isaac Newton',
+        answer: 'Albert Einstein'
+    }
+
+];
+
 //----- variables -----//
 
-var totalSeconds = 10; // number of seconds per question
+var totalSeconds = 30; // number of seconds per question
 var intervalId; // timer second intervals
 var timeoutId; // coordinates questions with timer
 var clockRunning = false; // determines whether to clear interval
@@ -39,7 +118,7 @@ var timer = {
 
     // start countdown
 
-    start: function() {
+    start: function () {
 
         // reset the timer
 
@@ -47,8 +126,6 @@ var timer = {
         timer.time = seconds;
 
         // display seconds
-
-        timer.audioUpdate(seconds);
         $('#clock').text('00:' + seconds);
 
         // start countdown
@@ -64,7 +141,7 @@ var timer = {
 
     // stop game & show answers
 
-    stop: function() {
+    stop: function () {
 
         clockRunning = false;
         clearInterval(intervalId);
@@ -72,7 +149,7 @@ var timer = {
 
     // countdown
 
-    count: function() {
+    count: function () {
 
         timer.time--;
         var t = timer.time;
@@ -83,9 +160,8 @@ var timer = {
 
             $('#clock').text('00:00');
             timer.stop();
-            timer.audioUpdate(t);
 
-            timeoutId = setTimeout(function() {
+            timeoutId = setTimeout(function () {
 
                 checkAnswer('-1');
 
@@ -101,112 +177,16 @@ var timer = {
 
             $('#clock').text('00:' + t);
 
-            // audio countdown every 10 seconds
-
-            if ((t % 10) === 0) {
-
-                timer.audioUpdate(t);
-            }
         }
-    },
-
-    // audio countdown
-
-    audioUpdate: function(seconds) {
-
-        var recording;
-
-        switch (seconds) {
-            case 60:
-                recording = 'assets/audio/begin.mp3';
-                break;
-            case 50:
-                recording = 'assets/audio/50-seconds.mp3';
-                break;
-            case 40:
-                recording = 'assets/audio/40-seconds.mp3';
-                break;
-            case 30:
-                recording = 'assets/audio/30-seconds.mp3';
-                break;
-            case 20:
-                recording = 'assets/audio/20-seconds.mp3';
-                break;
-            case 10:
-                recording = 'assets/audio/10-seconds.mp3';
-                break;
-            case 0:
-                recording = 'assets/audio/stop.mp3';
-                break;
-        }
-
-        var audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', recording);
-        audioElement.play();
     },
 };
-
-//----- input array (questions and answers) -----//
-
-var quizArr = [{
-        question: 'Who invented the first printing press?',
-        option1: 'Johannes Gutenberg',
-        option2: 'Wang Chen',
-        option3: 'Bi Sheng',
-        answer: 'Bi Sheng'
-    },
-    {
-        question: 'Who was the first person to experiment with electricity?',
-        option1: 'Nikola Tesla',
-        option2: 'Girolamo Cardano',
-        option3: 'Thales of Miletus',
-        answer: 'Thales of Miletus'
-    },
-    {
-        question: 'Who invented the first motorized car?',
-        option1: 'Carle Benz',
-        option2: 'Henry Ford',
-        option3: 'Nicolas-Joseph Cugnot',
-        answer: 'Nicolas-Joseph Cugnot'
-    },
-    {
-        question: 'Who invented the first computer?',
-        option1: 'Charles Babbage',
-        option2: 'Pierre Jaquet-Droz',
-        option3: 'Hipparchus',
-        answer: 'Charles Babbage'
-    },
-    {
-        question: 'Who invented the atom bomb?',
-        option1: 'Albert Einstein',
-        option2: 'J.Robert Oppenheimer',
-        option3: 'Neither',
-        answer: 'Neither'
-    },
-    {
-        question: 'Who invented the first radio?',
-        option1: 'Nikola Tesla',
-        option2: 'Guglielmo Marconi',
-        option3: 'Heinrich HertzHeinrich Hertz',
-        answer: 'Guglielmo Marconi'
-    }
-];
-
-//----- this is where the action takes place -----//
-
-// initial state displays rules and start button
-
-$('rules-section').show();
-$('#quiz-section').css('visibility', 'hidden');
-$('#result').text('');
-
 
 function startGame() {
 
     // switch display to rules 
-    $('#start').hide();
     $('#rules-section').hide();
     $('#quiz-section').css('visibility', 'visible');
+    $('#quiz-form').css('visibility', 'visible');
 
     // start volley between questions and answers
     getQuestion();
@@ -225,9 +205,9 @@ function getQuestion() {
         // set timer
         timer.start();
 
-        timeoutID = setTimeout(function() {
+        timeoutID = setTimeout(function () {
             return;
-        }, totalSeconds * 1000);
+        }, totalSeconds * 3000);
 
         // reset state
 
@@ -297,11 +277,11 @@ function checkAnswer(value) {
 
     quizIndex++;
 
-    timeoutId = setTimeout(function() {
+    timeoutId = setTimeout(function () {
 
         getQuestion();
 
-    }, 1000);
+    }, 3000);
 
 }
 
@@ -311,21 +291,20 @@ function endGame() {
 
     // display results
 
-    $('#quiz-section').css('visibility', 'hidden');
+    $('#quiz-form').css('visibility', 'hidden');
     $('#answer').text('');
     $('#result').text('Congratulations! You got ' + numCorrect + ' answers right out of ' + numAsked + ' questions.');
 
-    timeoutId = setTimeout(function() {
+    timeoutId = setTimeout(function () {
 
         resetGame();
 
-    }, 1000);
+    }, 3000);
 }
 
 function resetGame() {
 
     quizIndex = 0;
-    $('#start').show();
     $('#rules-section').show();
     $('#answer').text('');
     $('#result').text('');

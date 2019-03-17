@@ -5,64 +5,61 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE backward compatibility-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Trivia Game</title>
 
+    <!-- icons must be png or ico image type -->
+    <link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon" />
+
+    <!-- normalize everything for cross browser compatibility before applying styles -->
+    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+
+    <!-- custom styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-    <div id="main-wrapper">
+    <div id="container">
 
-        <h1>Trivia Game</h1>
+        <h1><img id="header" src="assets/images/header.png" alt="Who said it trivia quiz"></h1>
 
-        <div id="clock">00:00</div>
-
-        <button id="start">Start</button>
-
-        <main>
-
+        <div id="content-wrapper">
             <section id="rules-section">
-
                 <h2>Rules:</h2>
-                <ul>
-                    <li>Press "Start" to start the game.</li>
-                    <li>There are 15 questions</li>
-                    <li>Each has 3 answers to choose from.</li>
-                    <li>Only one of them is correct.</li>
-                    <li>You will be given 30 seconds to answer each question.</li>
-                    <li>See how many you can answer correctly.</li>
-                </ul>
-
-            </section>
+                <p>
+                    You will be presented with a series of multiple choice questions. Click on the button next to the
+                    correct answers. You will have 30 seconds to answer each. See how many you can answer correctly.
+                </p>
+                <p>
+                    Press the <button id="start">Start</button> to begin.
+                </p>
+            </section> <!-- id="rules-section-->
 
             <section id="quiz-section">
+                <div id="clock">00:00</div>
+                <p id="result" class="bold"></p>
 
-                <form id="quiz-form">Questions:
-
+                <form id="quiz-form">
+                    <h2>Question:</h2>
                     <fieldset>
                         <legend id="question" class="bold"></legend>
                         <input type="radio" name="opt" class="option" value="1">&nbsp;<label id="label-1" class="question"></label><br>
                         <input type="radio" name="opt" class="option" value="2">&nbsp;<label id="label-2" class="question"></label><br>
                         <input type="radio" name="opt" class="option" value="3">&nbsp;<label id="label-3" class="question"></label><br>
                     </fieldset>
-
+                    <label id="answer" class="bold"></label>
                 </form>
 
-                <p id="answer" class="bold"></p>
+            </section> <!-- id="quiz-section" -->
+        </div> <!-- id="content-wrapper" -->
+    </div> <!-- id="container" -->
 
-            </section>
-
-            <p id="result" class="bold"></p>
-
-        </main>
-
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <script type="text/javascript" src="assets/javascript/app.js"></script>
-
-    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </body>
 
