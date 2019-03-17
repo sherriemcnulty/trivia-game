@@ -18,8 +18,8 @@ window.onload = function () {
 
         timer.stop();
 
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(function () {
+        clearTimeout(timer.timeoutId);
+        timer.timeoutId = setTimeout(function () {
 
             checkAnswer(value);
 
@@ -103,18 +103,16 @@ var quizArr = [{
 ];
 
 //----- variables -----//
-
-var totalSeconds = 30; // number of seconds per question
-var intervalId; // timer second intervals
-var timeoutId; // coordinates questions with timer
-var clockRunning = false; // determines whether to clear interval
 var quizIndex = 0; // input array
 var numAsked = 0; // number of questions asked
 var numCorrect = 0; // number of correct answers
 
 var timer = {
-
-    time: totalSeconds,
+    startTime: 30,
+    time: 30,
+    clockRunning: false,
+    intervalId: "",
+    timeoutId: "",
 
     // start countdown
 
@@ -122,7 +120,7 @@ var timer = {
 
         // reset the timer
 
-        var seconds = totalSeconds;
+        var seconds = timer.startTime;
         timer.time = seconds;
 
         // display seconds
@@ -130,12 +128,12 @@ var timer = {
 
         // start countdown
 
-        if (!clockRunning) {
+        if (!timer.clockRunning) {
 
             // count() is the timer's workhorse
 
-            intervalId = setInterval(timer.count, 1000);
-            clockRunning = true;
+            timer.intervalId = setInterval(timer.count, 1000);
+            timer.clockRunning = true;
         }
     },
 
@@ -143,8 +141,8 @@ var timer = {
 
     stop: function () {
 
-        clockRunning = false;
-        clearInterval(intervalId);
+        timer.clockRunning = false;
+        clearInterval(timer.intervalId);
     },
 
     // countdown
@@ -161,7 +159,7 @@ var timer = {
             $('#clock').text('00:00');
             timer.stop();
 
-            timeoutId = setTimeout(function () {
+            timer.timeoutId = setTimeout(function () {
 
                 checkAnswer('-1');
 
@@ -205,9 +203,9 @@ function getQuestion() {
         // set timer
         timer.start();
 
-        timeoutID = setTimeout(function () {
+        timer.timeoutID = setTimeout(function () {
             return;
-        }, totalSeconds * 3000);
+        }, timer.startTime * 3000);
 
         // reset state
 
@@ -277,7 +275,7 @@ function checkAnswer(value) {
 
     quizIndex++;
 
-    timeoutId = setTimeout(function () {
+    timer.timeoutId = setTimeout(function () {
 
         getQuestion();
 
@@ -295,7 +293,7 @@ function endGame() {
     $('#answer').text('');
     $('#result').text('Congratulations! You got ' + numCorrect + ' answers right out of ' + numAsked + ' questions.');
 
-    timeoutId = setTimeout(function () {
+    timer.timeoutId = setTimeout(function () {
 
         resetGame();
 
