@@ -258,7 +258,7 @@ function endGame() {
     $('#quiz-form').css('visibility', 'hidden');
     $('#clock').css('visibility', 'hidden');
     $('#answer').text('');
-    $('#result').text('Congratulations! You got ' + numCorrect + ' answers right out of ' + numAsked + ' questions.');
+    $('#result').text('Congratulations! You got ' + numCorrect + ' answers right out of ' + numAsked + '.');
 
     timer.timeoutId = setTimeout(function () {
         resetGame();
