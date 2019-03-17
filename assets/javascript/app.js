@@ -1,9 +1,10 @@
-// Initialize the display.
+// ------ MAIN PROGRAM ------ //
+// INITIALIZE THE DISPLAY
 $('rules-section').show();
 $('#quiz-section').css('visibility', 'hidden');
 $('#result').text('');
 
-// Listen and respond
+// LISTEN FOR EVENTS
 window.onload = function () {
 
     $('#start').click(function () {
@@ -26,10 +27,13 @@ window.onload = function () {
         }, 1000);
     });
 };
+// ------ END MAIN PROGRAM ------ //
 
-// Data
-
-var quizArr = [{
+// GLOBAL VARIABLES
+var qIndex = 0; // questions array index
+var numAsked = 0; // number of questions asked
+var numCorrect = 0; // number of correct answers
+const questions = [{
         question: '"Intelligence plus character—that is the goal of true education."',
         option1: 'Maya Angelou',
         option2: 'Dr. Martin Luther King Jr.',
@@ -99,14 +103,9 @@ var quizArr = [{
         option3: 'Isaac Newton',
         answer: 'Albert Einstein'
     }
+]; // questions
 
-];
-
-//----- variables -----//
-var quizIndex = 0; // input array
-var numAsked = 0; // number of questions asked
-var numCorrect = 0; // number of correct answers
-
+// TIMER OBJECT
 var timer = {
     startTime: 30,
     time: 30,
@@ -119,7 +118,6 @@ var timer = {
     start: function () {
 
         // reset the timer
-
         var seconds = timer.startTime;
         timer.time = seconds;
 
@@ -127,78 +125,75 @@ var timer = {
         $('#clock').text('00:' + seconds);
 
         // start countdown
-
         if (!timer.clockRunning) {
 
-            // count() is the timer's workhorse
-
+            // count is the timer's workhorse
             timer.intervalId = setInterval(timer.count, 1000);
             timer.clockRunning = true;
         }
-    },
+    }, // start()
 
-    // stop game & show answers
-
+    // stop countdown
     stop: function () {
 
         timer.clockRunning = false;
         clearInterval(timer.intervalId);
-    },
+    }, // stop()
 
-    // countdown
-
+    // countdown: this is the timer's workhorse
     count: function () {
 
         timer.time--;
         var t = timer.time;
 
-        if (t < 1) {
-
-            // time's up
-
+        if (t < 1) { // time's up
             $('#clock').text('00:00');
             timer.stop();
 
             timer.timeoutId = setTimeout(function () {
-
                 checkAnswer('-1');
-
             }, 1000);
 
-        } else if (t < 10) {
-
-            // single digit
-
+        } else if (t < 10) { // single digit
             $('#clock').text('00:0' + t);
 
         } else {
-
             $('#clock').text('00:' + t);
-
         }
-    },
-};
+    }, // count()
+}; // timer
 
+// FUNCTIONS
 function startGame() {
-
-    // switch display to rules 
+    // switch from rules display to quiz display
     $('#rules-section').hide();
     $('#quiz-section').css('visibility', 'visible');
     $('#quiz-form').css('visibility', 'visible');
-
-    // start volley between questions and answers
+    $('#clock').css('visibility', 'visible');
+    // load the first question
     getQuestion();
-}
+} // startGame()
 
 function getQuestion() {
 
-    var i = quizIndex;
+    // qIndex is a global index into the questions array
+    var i = qIndex;
 
-    if (i === quizArr.length) { // no more questions
+    if (i === questions.length) { // no more questions
 
         endGame();
 
     } else {
+        // reset radio buttons
+        $('.option').attr('disabled', false);
+        $('.option').prop('checked', false);
+
+        // display the question
+        $('#question').text(questions[i].question);
+        $('#label-1').text(questions[i].option1);
+        $('#label-2').text(questions[i].option2);
+        $('#label-3').text(questions[i].option3);
+        $('#answer').text('');
 
         // set timer
         timer.start();
@@ -206,34 +201,18 @@ function getQuestion() {
         timer.timeoutID = setTimeout(function () {
             return;
         }, timer.startTime * 3000);
-
-        // reset state
-
-        $('.option').attr('disabled', false);
-        $('.option').prop('checked', false);
-
-        // load form
-
-        $('#question').text(quizArr[i].question);
-        $('#label-1').text(quizArr[i].option1);
-        $('#label-2').text(quizArr[i].option2);
-        $('#label-3').text(quizArr[i].option3);
-        $('#answer').text('');
     }
-}
+} // getQuestion()
 
 function checkAnswer(value) {
-
     var choice;
-    var answer = quizArr[quizIndex].answer;
+    var answer = questions[qIndex].answer;
 
     numAsked++;
-
     $('.option').attr('disabled', true);
 
     // get label text by button value
     switch (value) {
-
         case ('1'):
             {
                 choice = $('#label-1').text();
@@ -241,13 +220,11 @@ function checkAnswer(value) {
             }
         case ('2'):
             {
-
                 choice = $('#label-2').text();
                 break;
             }
         case ('3'):
             {
-
                 choice = $('#label-3').text();
                 break;
             }
@@ -255,56 +232,44 @@ function checkAnswer(value) {
             {
                 choice = '-1';
             }
-    }
+    } // switch
 
     if (choice === answer) {
-
         numCorrect++;
         $('#answer').text('Yes! The correct answer is ' + answer + '.');
 
     } else if (choice === '-1') {
-
         $('#answer').text('Too slow! The correct answer is ' + answer + '.');
-
     } else {
-
         $('#answer').text('Nope! The correct answer is ' + answer + '.');
     }
 
     // prepare for next question
-
-    quizIndex++;
-
+    qIndex++;
     timer.timeoutId = setTimeout(function () {
-
         getQuestion();
-
     }, 3000);
-
-}
+} // checkAnswer()
 
 function endGame() {
-
     timer.stop();
 
     // display results
-
     $('#quiz-form').css('visibility', 'hidden');
+    $('#clock').css('visibility', 'hidden');
     $('#answer').text('');
     $('#result').text('Congratulations! You got ' + numCorrect + ' answers right out of ' + numAsked + ' questions.');
 
     timer.timeoutId = setTimeout(function () {
-
         resetGame();
-
     }, 3000);
-}
+} // endGame()
 
 function resetGame() {
 
-    quizIndex = 0;
+    qIndex = 0;
     $('#rules-section').show();
     $('#answer').text('');
     $('#result').text('');
     $('#quiz-section').css('visibility', 'hidden');
-}
+} // resetGame()
