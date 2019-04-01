@@ -34,74 +34,74 @@ var qIndex = 0; // questions array index
 var numAsked = 0; // number of questions asked
 var numCorrect = 0; // number of correct answers
 const questions = [{
-        question: '"Intelligence plus character—that is the goal of true education."',
-        option1: 'Maya Angelou',
-        option2: 'Dr. Martin Luther King Jr.',
-        option3: 'Mahatma Gandhi',
-        answer: 'Dr. Martin Luther King Jr.'
+        question: 'What hormone does the pancreas produce?',
+        option1: 'Prolactin',
+        option2: 'Insulin',
+        option3: 'Adrenaline',
+        answer: 'Insulin'
     },
     {
-        question: '"If you are always trying to be normal you will never know how amazing you can be."',
-        option1: 'Maya Angelou',
-        option2: 'Nelson Mandela',
-        option3: 'Mahatma Gandhi',
-        answer: 'Maya Angelou'
+        question: 'What percent of cells in the human body are bacteria?',
+        option1: '18%',
+        option2: '35%',
+        option3: '90%',
+        answer: '90%'
     },
     {
-        question: '"Be the change that you wish to see in the world."',
-        option1: 'Maya Angelou',
-        option2: 'Mother Teresa',
-        option3: 'Mahatma Gandhi',
-        answer: 'Mahatma Gandhi'
+        question: 'In what type of matter are atoms most tightly packed?',
+        option1: 'Liquid',
+        option2: 'Solid',
+        option3: 'Gas',
+        answer: 'Solid'
     },
     {
-        question: '"If you want to change the world, go home and love your family."',
-        option1: 'Mahatma Gandhi',
-        option2: 'Mother Teresa',
-        option3: 'Dr. Martin Luther King Jr.',
-        answer: 'Mother Teresa'
+        question: 'What planet has the most moons?',
+        option1: 'Jupiter',
+        option2: 'Saturn',
+        option3: 'Uranus',
+        answer: 'Jupiter'
     },
     {
-        question: '"Do not learn how to react learn how to respond."',
-        option1: 'Buddha',
-        option2: 'Confucius',
-        option3: 'Aristotle',
-        answer: 'Buddha'
+        question: 'Hurricanes only form over _____?',
+        option1: 'Warm Water',
+        option2: 'Cold Water',
+        option3: 'Sirrus Clouds',
+        answer: 'Warm Water'
     },
     {
-        question: '"True peace is not merely the absence of tension; it is the presence of justice."',
-        option1: 'Dr. Martin Luther King Jr.',
-        option2: 'Malcolm X',
-        option3: 'Mahatma Gandhi',
-        answer: 'Dr. Martin Luther King Jr.'
+        question: 'Which type of cloud means rain?',
+        option1: 'Alto',
+        option2: 'Cirrus',
+        option3: 'Nimbus',
+        answer: 'Nimbus'
     },
     {
-        question: '"Obstacles are those frightful things you see when you take your eyes off the goal."',
-        option1: 'Steve Jobs',
-        option2: 'Albert Einstein',
-        option3: 'Henry Ford',
-        answer: 'Henry Ford'
+        question: 'Who invented the first battery?',
+        option1: 'Alessandro Volta',
+        option2: 'Isaac Newton',
+        option3: 'Benjamin Franklin',
+        answer: 'Alessandro Volta'
     },
     {
-        question: '"It always seems impossible until it\'s done."',
-        option1: 'Nelson Mandela',
-        option2: 'Dr. Martin Luther King Jr.',
-        option3: 'Mahatma Gandhi',
-        answer: 'Nelson Mandela'
+        question: "What layer of the Earth's atmosphere makes radio communications possible?",
+        option1: 'Stratosphere',
+        option2: 'Thermosphere',
+        option3: 'Ionosphere',
+        answer: 'Ionosphere'
     },
     {
-        question: '"Resentment is like drinking poison and then hoping it will kill your enemies."',
-        option1: 'Mahatma Gandhi',
-        option2: 'Nelson Mandela',
-        option3: 'Dr. Martin Luther King Jr.',
-        answer: 'Nelson Mandela'
+        question: 'How many pencils could you produce from the carbon in the average human body?',
+        option1: '90',
+        option2: '900',
+        option3: '9,000',
+        answer: '9,000'
     },
     {
-        question: '"Only two things are infinite, the universe and human stupidity, and I\'m not sure about the former."',
-        option1: 'Winston Churchill',
-        option2: 'Albert Einstein',
-        option3: 'Isaac Newton',
-        answer: 'Albert Einstein'
+        question: 'What is the most abundant element in the Universe?',
+        option1: 'Hydrogen',
+        option2: 'Iron',
+        option3: 'Carbon',
+        answer: 'Hydrogen'
     }
 ]; // questions
 
